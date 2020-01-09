@@ -63,4 +63,5 @@ for i in myRatings.index:
         
 print ("\nGetting movie recommendations for you...\n\nTitle\t\t\t\t\tSimilarity score (relative)\n")
 
+#print top 10 movie recommendations
 print(filteredSims.head(10))       
