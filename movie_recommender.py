@@ -7,13 +7,14 @@ Created on Thu Jan  9 22:11:22 2020
 
 import pandas as pd
 
+#the below mentioned files have real world data from MovieLens, its a bit old though
 #read movie ratings file, change the path below to where ever you have downloaded that file
 r_cols = ['user_id', 'movie_id', 'rating']
-ratings = pd.read_csv('c:/ml-100k/u.data', sep='\t', names=r_cols, usecols=range(3), encoding="ISO-8859-1")
+ratings = pd.read_csv('c:/u.data', sep='\t', names=r_cols, usecols=range(3), encoding="ISO-8859-1")
 
 #read another file with movie titles, change the path below to where ever you have downloaded that file
 m_cols = ['movie_id', 'title']
-movies = pd.read_csv('c:/ml-100k/u.item', sep='|', names=m_cols, usecols=range(2), encoding="ISO-8859-1")
+movies = pd.read_csv('c:/u.item', sep='|', names=m_cols, usecols=range(2), encoding="ISO-8859-1")
 
 #merge both dataframes
 ratings = pd.merge(movies, ratings)
