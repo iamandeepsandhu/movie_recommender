@@ -8,10 +8,10 @@ Created on Thu Jan  9 22:11:22 2020
 import pandas as pd
 
 r_cols = ['user_id', 'movie_id', 'rating']
-ratings = pd.read_csv('c:/MLCourse/ml-100k/u.data', sep='\t', names=r_cols, usecols=range(3), encoding="ISO-8859-1")
+ratings = pd.read_csv('c:/ml-100k/u.data', sep='\t', names=r_cols, usecols=range(3), encoding="ISO-8859-1")
 
 m_cols = ['movie_id', 'title']
-movies = pd.read_csv('c:/MLCourse/ml-100k/u.item', sep='|', names=m_cols, usecols=range(2), encoding="ISO-8859-1")
+movies = pd.read_csv('c:/ml-100k/u.item', sep='|', names=m_cols, usecols=range(2), encoding="ISO-8859-1")
 
 ratings = pd.merge(movies, ratings)
 
@@ -45,16 +45,16 @@ for i in range(0, len(myRatings.index)):
     # Add the score to the list of similarity candidates
     simCandidates = simCandidates.append(sims)
     
-#Glance at our results so far:
 print ("\nGetting movie recommendations for you...\n\nTitle\t\t\t\t\tSimilarity score (relative)\n")
+
 simCandidates.sort_values(inplace = True, ascending = False)
 
-
+#add together the scores from movies that show up more than once, so they'll count more
 simCandidates = simCandidates.groupby(simCandidates.index).sum()
 
 simCandidates.sort_values(inplace = True, ascending = False)
 
-
+#drop movies which i have already rated
 for i in myRatings.index:
     if(i in simCandidates):
         filteredSims=simCandidates.drop(i)
